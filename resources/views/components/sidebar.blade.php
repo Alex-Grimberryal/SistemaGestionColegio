@@ -61,7 +61,7 @@
                 </ul>
             </div>
             <div class="w-100 sticky-bottom mx-3 my-3">
-                <button type="button" class="btn btn-outline-warning btn-lg" style="width: 93%;">Cerrar Sesión</button>
+                <a href="{{ route('logout') }}" class="btn btn-outline-warning btn-lg" style="width: 93%;">Cerrar Sesión</a>
             </div>
         </div>
     </div>

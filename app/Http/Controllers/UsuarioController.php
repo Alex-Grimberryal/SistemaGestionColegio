@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -31,7 +32,7 @@ class UsuarioController extends Controller
         // Crear un nuevo objeto Usuario con los datos del formulario
         $usuario = new Usuario();
         $usuario->nombre = $request->nombre;
-        $usuario->contrasena = $request->contrasena;
+        $usuario->contrasena = Hash::make($request->contrasena); // Encriptar la contraseña utilizando Hash::make()
         $usuario->rol = $request->rol;
         $usuario->save();
 
@@ -57,7 +58,7 @@ class UsuarioController extends Controller
         // Buscar el usuario a editar por su ID
         $usuario = Usuario::findOrFail($id);
         $usuario->nombre = $request->nombre;
-        $usuario->contrasena = $request->contrasena;
+        $usuario->contrasena = Hash::make($request->contrasena); // Encriptar la contraseña utilizando Hash::make()
         $usuario->rol = $request->rol;
         $usuario->save();
 

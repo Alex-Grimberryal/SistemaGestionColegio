@@ -12,7 +12,7 @@
             </div>
         @endsession
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('login.post') }}">
             @csrf
 
             <div>
@@ -22,7 +22,7 @@
 
             <div>
                 <label for="contrasena">Contraseña:</label>
-                <input type="password" name="contrasena" id="contrasena" required>
+                <input type="password" name="password" id="contrasena" required>
             </div>
 
             <div>
