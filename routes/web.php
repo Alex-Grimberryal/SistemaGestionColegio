@@ -8,13 +8,14 @@ use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\MarCatController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\AuthLoginController;
+use App\Models\SesionesAbiertas;
 
 
-Route::get('/', [AuthLoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthLoginController::class, 'login'])->name('login.post');
-Route::get('/logout', [AuthLoginController::class, 'logout'])->name('logout');
+if (SesionesAbiertas::count() > 0) {
 
-Route::middleware(['auth'])->group(function () {
+    Route::get('/', [AuthLoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthLoginController::class, 'login'])->name('login.post');
+    Route::get('/logout', [AuthLoginController::class, 'logout'])->name('logout');
 
     Route::get('/welcome', function () {
         return view('welcome.welcome');
@@ -63,4 +64,24 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
     Route::get('/usuarios/{id}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
     Route::put('/usuarios/{id}', [UsuarioController::class, 'update'])->name('usuarios.update');
-});
+
+    Route::get('/cargando', function () {
+        return view('welcome.cargando');
+    })->name('cargando');
+} else {
+    // Redireccionar al formulario de inicio de sesión cuando no hay sesiones abiertas
+    Route::any('/', function () {
+        return redirect()->route('login');
+    });
+
+    Route::post('/login', [AuthLoginController::class, 'login'])->name('login.post');
+
+    Route::get('/cargando', function () {
+        return view('welcome.cargando');
+    })->name('cargando');
+
+    // Redireccionar al formulario de inicio de sesión cuando se accede a otras rutas sin iniciar sesión
+    Route::any('/{any}', function () {
+        return redirect()->route('login');
+    });
+}
