@@ -44,7 +44,7 @@
                 </div>
                 <div class="form-group">
                     <label for="fechaadq">Fecha de adquisición:</label>
-                    <input type="date" class="form-control" id="fechaadq" name="fechaadq" value="{{ $articulo->fechaadq instanceof \Carbon\Carbon ? $articulo->fechaadq->format('Y-m-d') : '' }}" />
+                    <input type="date" class="form-control" id="fechaadq" name="fechaadq" value="{{ $articulo->fechaadq instanceof \Carbon\Carbon ? $articulo->fechaadq->format('Y-m-d') : '' }}" required/>
                 </div>
 
                 <script>
@@ -63,16 +63,21 @@
                     document.getElementById('fechaadq').value = document.getElementById('fechaadq').value || formattedDate;
                 </script>
                 <div class="form-group">
-                    <label for="estado">Estado:</label>
-                    <select name="estado" class="form-control" required>
-                        <option value="">Seleccionar estado</option>
-                        <option value="0" {{ $articulo->estado == '0' ? 'selected' : '' }}>En Uso</option>
-                        <option value="1" {{ $articulo->estado == '1' ? 'selected' : '' }}>Descompuesto</option>
-                        <option value="2" {{ $articulo->estado == '2' ? 'selected' : '' }}>En Almacen</option>
-                        <!-- Agrega más opciones según sea necesario -->
-                    </select>
+                    <label>Stock:</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text text-success" for="Stock_en_uso">En uso</span>
+                        <input type="number" name="Stock_en_uso" aria-label="Stock en uso" class="form-control" value="{{ $articulo->Stock_en_uso }}" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text text-warning" for="Stock_almacenado">En Almacen</span>
+                        <input type="number" name="Stock_almacenado" aria-label="Stock en almacén" class="form-control" value="{{ $articulo->Stock_almacenado }}" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text text-danger" for="stock_dañado">Dañado</span>
+                        <input type="number" name="stock_dañado" aria-label="Stock dañado" class="form-control" value="{{ $articulo->stock_dañado }}" required>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary mt-4">Guardar Ambiente</button>
+                <button type="submit" class="btn btn-outline-primary mt-4">Guardar Articulo</button>
             </form>
         </div>
     </main>

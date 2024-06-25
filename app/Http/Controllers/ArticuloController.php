@@ -34,6 +34,9 @@ class ArticuloController extends Controller
             'articulo' => $request->input('articulo'),
             'fechaadq' => $request->input('fechaadq'),
             'estado' => $request->input('estado'),
+            'Stock_en_uso' => $request->input('Stock_en_uso'),
+            'Stock_almacenado' => $request->input('Stock_almacenado'),
+            'stock_dañado' => $request->input('stock_dañado'),
         ]);
 
         $articulo->save();
@@ -63,7 +66,9 @@ class ArticuloController extends Controller
             'nroserie' => $request->input('nroserie'),
             'articulo' => $request->input('articulo'),
             'fechaadq' => $request->input('fechaadq'),
-            'estado' => $request->input('estado'),
+            'Stock_en_uso' => $request->input('Stock_en_uso'),
+            'Stock_almacenado' => $request->input('Stock_almacenado'),
+            'stock_dañado' => $request->input('stock_dañado'),
         ]);
 
         return redirect()->route('articulos.index')->with('success', 'El artículo se ha actualizado correctamente.');

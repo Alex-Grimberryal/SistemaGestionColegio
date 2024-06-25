@@ -2,27 +2,11 @@
 <x-sidebar></x-sidebar>
 <div class="container-fluid col-10" style="margin-top: 7%;">
     <div class="row">
-        <div class="col-2">
+        <div class="col-5">
             <div class="container-fluid">
                 <div class="top-section text-center">
                     <div class="align-items-center col-12">
                         <h1>Bienvenido {{ session('nombre') }}</h1>
-                    </div>
-                    <div class="d-flex">
-                        <div class="px-5 flex-grow-1">
-                            <button type="button" class="btn btn-primary btn-block">Articulos registrados:
-                                *****</button>
-                        </div>
-                        <div class="px-5 flex-grow-1">
-                            <button type="button" class="btn btn-primary btn-block">Articulos dañados: *****</button>
-                        </div>
-                        <div class="px-5 flex-grow-1">
-                            <button type="button" class="btn btn-primary btn-block">Reservaciones hechas en la semana:
-                                *****</button>
-                        </div>
-                        <div class="px-5 flex-grow-1">
-                            <button type="button" class="btn btn-primary btn-block">Horas sin usar: *****</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -30,17 +14,33 @@
         <div class="text-success">
             <hr>
         </div>
-        <div class="col-10">
+        <div class="col-3">
             <div class="bottom-section">
-                <!-- Contenido de la parte inferior -->
-                @if (session('refresh'))
-                    <script>
-                        window.onload = function() {
-                            location.reload(true);
-                        };
-                    </script>
-                @endif
+                <div class="card text-bg-success mb-3" style="max-width: 18rem;">
+                    <div class="card-header">Articulos registrados</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Hay *** articulos en inventario</h5>
+                        <p class="card-text">Ver mas</p>
+                    </div>
+                </div>
+                <div class="card text-bg-warning mb-3" style="max-width: 18rem;">
+                    <div class="card-header">Articulos sin usar</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Hay *** articulos en almacen</h5>
+                        <p class="card-text">Ver mas</p>
+                    </div>
+                </div>
+                <div class="card text-bg-secondary mb-3" style="max-width: 18rem;">
+                    <div class="card-header">Usuarios</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Hay ** usuarios activos</h5>
+                        <p class="card-text">Ver mas</p>
+                    </div>
+                </div>
             </div>
+        </div>
+        <div class="col-9">
+
         </div>
     </div>
 </div>

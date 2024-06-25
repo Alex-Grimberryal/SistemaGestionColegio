@@ -28,7 +28,9 @@
                                 <th>Fecha de Adquisicion</th>
                                 <th>Fecha de Creación</th>
                                 <th>Fecha de Actualización</th>
-                                <th>Estado</th>
+                                <th>Stock en uso</th>
+                                <th>Stock Almacenado</th>
+                                <th>Stock Dañado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -44,19 +46,13 @@
                                     <td>{{ $articulo->fechaadq }}</td>
                                     <td>{{ $articulo->created_at }}</td>
                                     <td>{{ $articulo->updated_at }}</td>
-                                    <td>
-                                        @if($articulo->estado == 0)
-                                            <span style="color: green;">En Uso</span>
-                                        @elseif($articulo->estado == 1)
-                                            <span style="color: red;">Descompuesto</span>
-                                        @elseif($articulo->estado == 2)
-                                            <span style="color: yellow;">En Almacén</span>
-                                        @endif
-                                    </td>
+                                    <td class="text-success">{{ $articulo->Stock_en_uso }}</td>
+                                    <td class="text-warning">{{ $articulo->Stock_almacenado }}</td>
+                                    <td class="text-danger">{{ $articulo->stock_dañado }}</td>
                                     <td>
                                         <div class="col-4">
                                             <a href="{{ route('articulos.edit', ['articulo' => $articulo->id]) }}"
-                                                class="btn btn-sm btn-info">Editar</a>
+                                                class="btn btn-sm btn-outline-info">Editar</a>
                                         </div>
                                     </td>
                                 </tr>

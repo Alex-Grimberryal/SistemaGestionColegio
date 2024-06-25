@@ -63,16 +63,22 @@
                 </script>
 
                 <div class="form-group">
-                    <label for="estado">Estado:</label>
-                    <select name="estado" class="form-control" required>
-                        <option value="">Seleccionar estado</option>
-                        <option value="0">En Uso</option>
-                        <option value="1">Descompuesto</option>
-                        <option value="2">En Almacen</option>
-                        <!-- Agrega más opciones según sea necesario -->
-                    </select>
+                    <label>Stock:</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text text-success" for="Stock_en_uso">En uso</span>
+                        <input type="number" name="Stock_en_uso" aria-label="Stock en uso" class="form-control">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text text-warning" for="Stock_almacenado">En Almacen</span>
+                        <input type="number" name="Stock_almacenado" aria-label="Stock en almacén"
+                            class="form-control">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text text-danger" for="stock_dañado">Dañado</span>
+                        <input type="number" name="stock_dañado" aria-label="Stock dañado" class="form-control">
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary mt-4">Guardar Ambiente</button>
+                <button type="submit" class="btn btn-outline-primary mt-4">Guardar Articulo</button>
             </form>
         </div>
     </main>

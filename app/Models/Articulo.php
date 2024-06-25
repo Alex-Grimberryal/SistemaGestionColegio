@@ -18,7 +18,9 @@ class Articulo extends Model
         'nroserie',
         'articulo',
         'fechaadq',
-        'estado',
+        'Stock_en_uso',
+        'Stock_almacenado',
+        'stock_dañado',
     ];
 
     public function ambiente()
