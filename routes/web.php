@@ -10,6 +10,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\AuthLoginController;
 use App\Http\Controllers\GraficosController;
 use Illuminate\Support\Facades\DB;
+use App\Models\Categoria;
 use App\Models\Usuario;
 use App\Models\Articulo;
 use App\Models\SesionesAbiertas;
@@ -22,19 +23,43 @@ if (SesionesAbiertas::count() > 0) {
     Route::get('/logout', [AuthLoginController::class, 'logout'])->name('logout');
 
     Route::get('/welcome', function () {
-        $articulos=Articulo::select(
+        $articulos = Articulo::select(
             DB::raw('SUM(Stock_en_uso) as sumStockEnUso'),
             DB::raw('SUM(Stock_almacenado) as sumStockAlmacenado'),
             DB::raw('SUM(stock_dañado) as sumStockDanado')
         )->first();
-        $usuarios=Usuario::select(
+        $usuarios = Usuario::select(
             DB::raw('SUM(CASE WHEN rol = "Administrador" THEN 1 ELSE 0 END) as admin'),
-    DB::raw('SUM(CASE WHEN rol = "Operario" THEN 1 ELSE 0 END) as oper')
+            DB::raw('SUM(CASE WHEN rol = "Operario" THEN 1 ELSE 0 END) as oper')
         )->first();
-        return view('welcome.welcome',compact('articulos','usuarios'));
+        return view('welcome.welcome', compact('articulos', 'usuarios'));
     })->name('welcome');
 
-    Route::get('/grafico', [GraficosController::class, 'mostrarGrafico'])->name('grafico');
+    Route::get('/inventario', function () {
+        $articulosPorCategoria = Articulo::select(
+            'categorias.categoria as categoria',
+            DB::raw('SUM(Stock_en_uso) as sumStockEnUso'),
+            DB::raw('SUM(Stock_almacenado) as sumStockAlmacenado'),
+            DB::raw('SUM(stock_dañado) as sumStockDanado'),
+            DB::raw('SUM(Stock_en_uso + Stock_almacenado + stock_dañado) as sumTotalArticulos')
+        )
+            ->join('categorias', 'articulos.categorias_idcategoria', '=', 'categorias.idcategoria')
+            ->groupBy('categorias.categoria')
+            ->get();
+
+        foreach ($articulosPorCategoria as $articulos) {
+            $categoria = $articulos->categoria;
+            $sumStockEnUso = $articulos->sumStockEnUso;
+            $sumStockAlmacenado = $articulos->sumStockAlmacenado;
+            $sumStockDanado = $articulos->sumStockDanado;
+        }
+        $articulos = Articulo::select(
+            DB::raw('SUM(Stock_en_uso) as sumStockEnUso'),
+            DB::raw('SUM(Stock_almacenado) as sumStockAlmacenado'),
+            DB::raw('SUM(stock_dañado) as sumStockDanado')
+        )->first();
+        return view('inventario.inventario', compact('articulosPorCategoria','articulos'));
+    })->name('inventario');
 
     Route::get('/ambientes', [AmbienteController::class, 'index'])->name('ambientes.index');
     Route::get('/ambientes/create', [AmbienteController::class, 'create'])->name('ambientes.create');

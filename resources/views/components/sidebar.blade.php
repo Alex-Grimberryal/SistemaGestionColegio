@@ -1,6 +1,6 @@
 <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{ route('welcome') }}">
             <h1>Sistema de Gestion de Recursos</h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
@@ -43,7 +43,7 @@
                             Inventario
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="#">Inventario general</a></li>
+                            <li><a class="dropdown-item" href="{{ route('inventario') }}">Inventario general</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
