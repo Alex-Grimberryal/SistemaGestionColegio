@@ -8,6 +8,10 @@ use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\MarCatController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\AuthLoginController;
+use App\Http\Controllers\GraficosController;
+use Illuminate\Support\Facades\DB;
+use App\Models\Usuario;
+use App\Models\Articulo;
 use App\Models\SesionesAbiertas;
 
 
@@ -18,8 +22,19 @@ if (SesionesAbiertas::count() > 0) {
     Route::get('/logout', [AuthLoginController::class, 'logout'])->name('logout');
 
     Route::get('/welcome', function () {
-        return view('welcome.welcome');
+        $articulos=Articulo::select(
+            DB::raw('SUM(Stock_en_uso) as sumStockEnUso'),
+            DB::raw('SUM(Stock_almacenado) as sumStockAlmacenado'),
+            DB::raw('SUM(stock_dañado) as sumStockDanado')
+        )->first();
+        $usuarios=Usuario::select(
+            DB::raw('SUM(CASE WHEN rol = "Administrador" THEN 1 ELSE 0 END) as admin'),
+    DB::raw('SUM(CASE WHEN rol = "Operario" THEN 1 ELSE 0 END) as oper')
+        )->first();
+        return view('welcome.welcome',compact('articulos','usuarios'));
     })->name('welcome');
+
+    Route::get('/grafico', [GraficosController::class, 'mostrarGrafico'])->name('grafico');
 
     Route::get('/ambientes', [AmbienteController::class, 'index'])->name('ambientes.index');
     Route::get('/ambientes/create', [AmbienteController::class, 'create'])->name('ambientes.create');
