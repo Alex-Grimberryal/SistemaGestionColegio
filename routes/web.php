@@ -8,7 +8,7 @@ use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\MarCatController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\AuthLoginController;
-use App\Http\Controllers\GraficosController;
+use App\Http\Controllers\GenExcel;
 use Illuminate\Support\Facades\DB;
 use App\Models\Categoria;
 use App\Models\Usuario;
@@ -61,6 +61,80 @@ if (SesionesAbiertas::count() > 0) {
         return view('inventario.inventario', compact('articulosPorCategoria','articulos'));
     })->name('inventario');
 
+    Route::get('/reportes', function () {
+        $articulos = Articulo::with('ambiente', 'categoria', 'marca')->get();
+        // Transformar los nombres de las columnas
+        $articulosTransformados = $articulos->map(function ($articulo) {
+            return [
+                'ID' => $articulo->id,
+                'AMBIENTE' => $articulo->ambiente->ambiente,
+                'CATEGORIA' => $articulo->categoria->categoria,
+                'MARCA' => $articulo->marca->marca,
+                'NRO SERIE' => $articulo->nroserie,
+                'NOMBRE' => $articulo->articulo,
+                'FECHA DE ADQUICISION' => $articulo->fechaadq,
+                'FECHA DE CREACION DEL REGISTRO' => $articulo->created_at,
+                'FECHA DE ACTUALIZACION DEL REGISTRO' => $articulo->updated_at,
+                'STOCK EN USO' => $articulo->Stock_en_uso,
+                'STOCK EN ALMACEN' => $articulo->Stock_almacenado,
+                'STOCK DESCOMPUESTO' => $articulo->stock_dañado,
+            ];
+        });
+
+        $articulosEnUso = $articulos->map(function ($articulo) {
+            return [
+                'ID' => $articulo->id,
+                'AMBIENTE' => $articulo->ambiente->ambiente,
+                'CATEGORIA' => $articulo->categoria->categoria,
+                'MARCA' => $articulo->marca->marca,
+                'NRO SERIE' => $articulo->nroserie,
+                'NOMBRE' => $articulo->articulo,
+                'FECHA DE ADQUICISION' => $articulo->fechaadq,
+                'FECHA DE CREACION DEL REGISTRO' => $articulo->created_at,
+                'FECHA DE ACTUALIZACION DEL REGISTRO' => $articulo->updated_at,
+                'STOCK EN USO' => $articulo->Stock_en_uso,
+            ];
+        });
+
+        $articulosAlmacenados = $articulos->map(function ($articulo) {
+            return [
+                'ID' => $articulo->id,
+                'AMBIENTE' => $articulo->ambiente->ambiente,
+                'CATEGORIA' => $articulo->categoria->categoria,
+                'MARCA' => $articulo->marca->marca,
+                'NRO SERIE' => $articulo->nroserie,
+                'NOMBRE' => $articulo->articulo,
+                'FECHA DE ADQUICISION' => $articulo->fechaadq,
+                'FECHA DE CREACION DEL REGISTRO' => $articulo->created_at,
+                'FECHA DE ACTUALIZACION DEL REGISTRO' => $articulo->updated_at,
+                'STOCK EN ALMACEN' => $articulo->Stock_almacenado,
+            ];
+        });
+
+        $articulosDescompuestos = $articulos->map(function ($articulo) {
+            return [
+                'ID' => $articulo->id,
+                'AMBIENTE' => $articulo->ambiente->ambiente,
+                'CATEGORIA' => $articulo->categoria->categoria,
+                'MARCA' => $articulo->marca->marca,
+                'NRO SERIE' => $articulo->nroserie,
+                'NOMBRE' => $articulo->articulo,
+                'FECHA DE ADQUICISION' => $articulo->fechaadq,
+                'FECHA DE CREACION DEL REGISTRO' => $articulo->created_at,
+                'FECHA DE ACTUALIZACION DEL REGISTRO' => $articulo->updated_at,
+                'STOCK DESCOMPUESTO' => $articulo->stock_dañado,
+            ];
+        });
+
+        $articulosJson = $articulosTransformados->toJson();
+        $articulosU = $articulosEnUso->toJson();
+        $articulosA = $articulosAlmacenados->toJson();
+        $articulosD = $articulosDescompuestos->toJson();
+        return view('reportes.reportes', compact('articulosJson','articulosU','articulosA','articulosD'));
+    })->name('reportes');
+
+    Route::post('/reportes/exportar-excel', [GenExcel::class, 'exportarExcel']);
+
     Route::get('/ambientes', [AmbienteController::class, 'index'])->name('ambientes.index');
     Route::get('/ambientes/create', [AmbienteController::class, 'create'])->name('ambientes.create');
     Route::post('/ambientes', [AmbienteController::class, 'store'])->name('ambientes.store');
@@ -104,6 +178,8 @@ if (SesionesAbiertas::count() > 0) {
     Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
     Route::get('/usuarios/{id}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
     Route::put('/usuarios/{id}', [UsuarioController::class, 'update'])->name('usuarios.update');
+
+
 
     Route::get('/cargando', function () {
         return view('welcome.cargando');

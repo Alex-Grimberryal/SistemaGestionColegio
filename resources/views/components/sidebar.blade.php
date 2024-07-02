@@ -51,7 +51,7 @@
                             <li><a class="dropdown-item" href="{{ route('ambientes.index') }}">Ambientes</a></li>
                             <li><a class="dropdown-item" href="{{ route('Mar-Cat.index') }}">Marcas y Categorias</a></li>
                             <li><a class="dropdown-item" href="{{ route('usuarios.index') }}">Usuarios</a></li>
-                            <li><a class="dropdown-item" href="#">Reportes</a></li>
+                            <li><a class="dropdown-item" href="{{ route('reportes') }}">Reportes</a></li>
                         </ul>
                     </li>
 
