@@ -6,9 +6,9 @@ use App\Http\Controllers\ArticuloController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\MarCatController;
+use App\Http\Controllers\ProfesorController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\AuthLoginController;
-use App\Http\Controllers\GenExcel;
 use Illuminate\Support\Facades\DB;
 use App\Models\Categoria;
 use App\Models\Usuario;
@@ -133,8 +133,6 @@ if (SesionesAbiertas::count() > 0) {
         return view('reportes.reportes', compact('articulosJson','articulosU','articulosA','articulosD'));
     })->name('reportes');
 
-    Route::post('/reportes/exportar-excel', [GenExcel::class, 'exportarExcel']);
-
     Route::get('/ambientes', [AmbienteController::class, 'index'])->name('ambientes.index');
     Route::get('/ambientes/create', [AmbienteController::class, 'create'])->name('ambientes.create');
     Route::post('/ambientes', [AmbienteController::class, 'store'])->name('ambientes.store');
@@ -172,6 +170,12 @@ if (SesionesAbiertas::count() > 0) {
     Route::get('/articulos/{articulo}/edit', [ArticuloController::class, 'edit'])->name('articulos.edit');
     Route::put('/articulos/{articulo}', [ArticuloController::class, 'update'])->name('articulos.update');
     Route::delete('/articulos/{articulo}', [ArticuloController::class, 'destroy'])->name('articulos.destroy');
+
+    Route::get('/profesores', [ProfesorController::class, 'index'])->name('profesores.index');
+    Route::get('/profesores/create', [ProfesorController::class, 'create'])->name('profesores.create');
+    Route::post('/profesores', [ProfesorController::class, 'store'])->name('profesores.store');
+    Route::get('/profesores/{id}/edit', [ProfesorController::class, 'edit'])->name('profesores.edit');
+    Route::put('/profesores/{id}', [ProfesorController::class, 'update'])->name('profesores.update');
 
     Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
     Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');

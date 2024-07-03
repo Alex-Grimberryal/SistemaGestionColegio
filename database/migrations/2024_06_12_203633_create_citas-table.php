@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('citas', function (Blueprint $table) {
             $table->integer('ambientes_idambiente');
             $table->integer('profesores_idprofesor');
-            $table->date('fechahora');
+            $table->dateTime('fechahora');
             $table->timestamps();
 
             $table->foreign('ambientes_idambiente')->references('idambiente')->on('ambientes');

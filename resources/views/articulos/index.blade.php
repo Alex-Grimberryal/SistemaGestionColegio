@@ -62,6 +62,7 @@
                     </table>
                 </div>
             </div>
+            {{ $articulos->links('pagination::bootstrap-4') }}
         </div>
     </main>
 </div>

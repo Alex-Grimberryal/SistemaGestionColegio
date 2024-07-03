@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('profesores', function (Blueprint $table) {
             $table->increments('idprofesor');
-            $table->string('profesor', 30);
-            $table->string('area', 30);
+            $table->string('profesor', 50);
+            $table->string('area', 70);
             $table->timestamps();
         });
     }

@@ -34,6 +34,7 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li><a class="dropdown-item" href="#">Ver reservaciones</a></li>
+                            <li><a class="dropdown-item" href="{{ route('profesores.index') }}">Profesores</a></li>
                         </ul>
                     </li>
 

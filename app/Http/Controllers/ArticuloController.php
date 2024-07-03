@@ -12,7 +12,7 @@ class ArticuloController extends Controller
 {
     public function index()
     {
-        $articulos = Articulo::all();
+        $articulos = Articulo::paginate(10);
         return view('articulos.index', compact('articulos'));
     }
 
