@@ -9,5 +9,5 @@ class SesionesAbiertas extends Model
 {
     use HasFactory;
     protected $table = 'sesiones_abiertas';
-    protected $fillable = ['nombre_usuario'];
+    protected $fillable = ['nombre_usuario','rol'];
 }

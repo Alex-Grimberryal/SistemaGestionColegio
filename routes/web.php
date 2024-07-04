@@ -21,6 +21,12 @@ use App\Models\SesionesAbiertas;
 
 if (SesionesAbiertas::count() > 0) {
 
+        Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+        Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
+        Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
+        Route::get('/usuarios/{id}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
+        Route::put('/usuarios/{id}', [UsuarioController::class, 'update'])->name('usuarios.update');
+
     Route::get('/', [AuthLoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthLoginController::class, 'login'])->name('login.post');
     Route::get('/logout', [AuthLoginController::class, 'logout'])->name('logout');
@@ -195,11 +201,6 @@ if (SesionesAbiertas::count() > 0) {
     Route::get('/profesores/{id}/edit', [ProfesorController::class, 'edit'])->name('profesores.edit');
     Route::put('/profesores/{id}', [ProfesorController::class, 'update'])->name('profesores.update');
 
-    Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
-    Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
-    Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
-    Route::get('/usuarios/{id}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
-    Route::put('/usuarios/{id}', [UsuarioController::class, 'update'])->name('usuarios.update');
 
 
 

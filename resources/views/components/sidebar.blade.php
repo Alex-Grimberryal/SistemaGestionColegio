@@ -29,11 +29,10 @@
                             Reservaciones
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="#">Nueva reservación</a></li>
+                            <li><a class="dropdown-item" href="{{ route('reservaciones') }}">Ver reservaciones</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="{{ route('reservaciones') }}">Ver reservaciones</a></li>
                             <li><a class="dropdown-item" href="{{ route('profesores.index') }}">Profesores</a></li>
                         </ul>
                     </li>

@@ -126,7 +126,7 @@
                                                         {{ $i }}:00 AM - {{ $i + 1 }}:00 AM
                                                     </div>
                                                 @endfor
-                                                <div class="col-12 px-2 py-2 mx-1 my-1 pe-auto bg-warning">R</div>
+                                                <div class="col-12 px-2 py-2 mx-1 my-1 pe-auto bg-warning">RECESO</div>
                                                 <!-- Hora de almuerzo -->
                                                 @for ($i = 1; $i <= 5; $i++)
                                                     <div class="col-12 px-2 py-2 mx-1 my-1 bg-info pe-auto">
@@ -295,7 +295,7 @@
                                                         {{ $i }}:00 AM - {{ $i + 1 }}:00 AM
                                                     </div>
                                                 @endfor
-                                                <div class="col-12 px-2 py-2 mx-1 my-1 pe-auto bg-warning">R</div>
+                                                <div class="col-12 px-2 py-2 mx-1 my-1 pe-auto bg-warning">RECESO</div>
                                                 <!-- Hora de almuerzo -->
                                                 @for ($i = 1; $i <= 5; $i++)
                                                     <div class="col-12 px-2 py-2 mx-1 my-1 bg-info pe-auto">

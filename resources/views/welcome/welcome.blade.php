@@ -7,6 +7,7 @@
                 <div class="top-section text-center">
                     <div class="align-items-center col-12">
                         <h1>Bienvenido {{ session('nombre') }}</h1>
+                        <h5>Su usuario es {{ session('rol') }}</h5>
                     </div>
                 </div>
             </div>

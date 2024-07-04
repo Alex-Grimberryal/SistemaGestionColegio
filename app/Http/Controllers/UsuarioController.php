@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Crypt;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -34,6 +35,7 @@ class UsuarioController extends Controller
         $usuario->nombre = $request->nombre;
         $usuario->contrasena = Hash::make($request->contrasena); // Encriptar la contraseña utilizando Hash::make()
         $usuario->rol = $request->rol;
+        $usuario->recuperacion = Crypt::encryptString($request->contrasena); //Encriptar la contraseña utilizando encryptString()
         $usuario->save();
 
         return redirect()->route('usuarios.index')->with('success', 'Usuario creado exitosamente');
@@ -60,6 +62,7 @@ class UsuarioController extends Controller
         $usuario->nombre = $request->nombre;
         $usuario->contrasena = Hash::make($request->contrasena); // Encriptar la contraseña utilizando Hash::make()
         $usuario->rol = $request->rol;
+        $usuario->recuperacion = Crypt::encryptString($request->contrasena); // Encriptar la contraseña utilizando encryptString()
         $usuario->save();
 
         return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado exitosamente');

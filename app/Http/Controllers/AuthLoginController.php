@@ -17,8 +17,14 @@ class AuthLoginController extends Controller
         $usuario = AuthUsuario::where('nombre', $credentials['nombre'])->first();
 
         if ($usuario && Hash::check($credentials['password'], $usuario->contrasena)) {
+
+            // Obtener el valor del campo "rol" del usuario autenticado
+            $rol = $usuario->rol;
+            // Almacenar el valor del campo "rol" en la sesión
+            $request->session()->put('rol', $rol);
+
             // Autenticación exitosa, almacenar el nombre del usuario en la tabla sesiones_abiertas
-            SesionesAbiertas::create(['nombre_usuario' => $usuario->nombre]);
+            SesionesAbiertas::create(['nombre_usuario' => $usuario->nombre, 'rol' => $rol]);
             // Autenticación exitosa, redirigir a la página deseada
             return redirect()->route('welcome'); // Modifica 'bienvenida' por 'welcome'
         }
@@ -46,8 +52,12 @@ class AuthLoginController extends Controller
         if ($usuario && Hash::check($credentials['password'], $usuario->contrasena)) {
             // Autenticación exitosa, almacenar el nombre del usuario en la sesión
             $request->session()->put('nombre', $usuario->nombre);
+            // Obtener el valor del campo "rol" del usuario autenticado
+            $rol = $usuario->rol;
+            // Almacenar el valor del campo "rol" en la sesión
+            $request->session()->put('rol', $rol);
             //Almacenamiento del usuario en una lista
-            SesionesAbiertas::create(['nombre_usuario' => $usuario->nombre]);
+            SesionesAbiertas::create(['nombre_usuario' => $usuario->nombre, 'rol' => $rol]);
             // Autenticación exitosa, redirigir a la página deseada
             return redirect()->route('cargando')->with('redirectToWelcome', true);
         }
