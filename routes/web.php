@@ -4,12 +4,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AmbienteController;
 use App\Http\Controllers\ArticuloController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\CitaController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\MarCatController;
 use App\Http\Controllers\ProfesorController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\AuthLoginController;
 use Illuminate\Support\Facades\DB;
+use App\Models\Ambiente;
+use App\Models\Profesor;
 use App\Models\Categoria;
 use App\Models\Usuario;
 use App\Models\Articulo;
@@ -34,6 +37,19 @@ if (SesionesAbiertas::count() > 0) {
         )->first();
         return view('welcome.welcome', compact('articulos', 'usuarios'));
     })->name('welcome');
+
+    Route::get('/reservaciones', function () {
+        $ambientes = Ambiente::all();
+        $profesores = Profesor::all();
+        return view('reservaciones.index', compact('ambientes','profesores'));
+    })->name('reservaciones');
+
+    Route::get('/reservaciones', [CitaController::class, 'index'])->name('reservaciones');
+    Route::get('/reservaciones/create', [CitaController::class, 'create'])->name('reservaciones.citas.create');
+    Route::post('/reservaciones', [CitaController::class, 'store'])->name('reservaciones.citas.store');
+    Route::get('/reservaciones/{id}/edit', [CitaController::class, 'edit'])->name('reservaciones.citas.edit');
+    Route::put('/reservaciones/{id}', [CitaController::class, 'update'])->name('reservaciones.citas.update');
+    Route::delete('/reservaciones/{id}', [CitaController::class, 'destroy'])->name('reservaciones.citas.destroy');
 
     Route::get('/inventario', function () {
         $articulosPorCategoria = Articulo::select(
@@ -170,6 +186,8 @@ if (SesionesAbiertas::count() > 0) {
     Route::get('/articulos/{articulo}/edit', [ArticuloController::class, 'edit'])->name('articulos.edit');
     Route::put('/articulos/{articulo}', [ArticuloController::class, 'update'])->name('articulos.update');
     Route::delete('/articulos/{articulo}', [ArticuloController::class, 'destroy'])->name('articulos.destroy');
+    Route::get('/filtrar', [ArticuloController::class, 'filtrar'])->name('articulo.filtrar');
+    Route::get('/articulo/buscar', [ArticuloController::class, 'buscar'])->name('articulo.buscar');
 
     Route::get('/profesores', [ProfesorController::class, 'index'])->name('profesores.index');
     Route::get('/profesores/create', [ProfesorController::class, 'create'])->name('profesores.create');

@@ -7,7 +7,41 @@
                 <div class="col-md-2">
                     <H1>Articulo</H1>
                 </div>
-                <div class="col-md-10 text-right">
+                <div class="col-md-6">
+                    <form action="{{ route('articulo.filtrar') }}" method="GET">
+                    <div class="d-flex justify-content-end">
+                        <div class="col-4 px-2">
+                            <select name="marca" class="form-control">
+                                <option value="">Seleccione Marca</option>
+                                @foreach ($marcas as $marca)
+                                    <option value="{{ $marca->idmarca }}">{{ $marca->marca }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-4 px-2">
+                            <select name="categoria" class="form-control">
+                                <option value="">Seleccione categoria</option>
+                                @foreach ($categorias as $categoria)
+                                    <option value="{{ $categoria->idcategoria }}">{{ $categoria->categoria }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-outline-primary">Filtrar</button>
+                        </div>
+                    </div>
+                </form>
+
+                </div>
+                <div class="col-md-3">
+                    <div class="d-flex-justify-content-end">
+                        <form class="d-flex" role="search" action="{{ route('articulo.buscar') }}" method="GET">
+                            <input class="form-control me-2" type="search" placeholder="Buscar Articulo" aria-label="Search" name="search">
+                            <button class="btn btn-outline-success" type="submit">Buscar</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-1 text-right">
                     <div class="d-flex justify-content-end">
                         <a href="{{ route('articulos.create') }}" class="btn btn-outline-primary">Añadir</a>
                     </div>
@@ -57,7 +91,6 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            <!-- Puedes agregar más filas aquí con los datos correspondientes -->
                         </tbody>
                     </table>
                 </div>

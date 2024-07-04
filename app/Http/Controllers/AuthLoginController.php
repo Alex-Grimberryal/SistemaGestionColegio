@@ -64,7 +64,6 @@ class AuthLoginController extends Controller
         $nombreUsuario = $request->session()->get('nombre');
         SesionesAbiertas::where('nombre_usuario', $nombreUsuario)->delete();
 
-
         Auth::logout();
 
         return redirect()->route('login');

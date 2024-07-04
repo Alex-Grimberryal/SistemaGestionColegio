@@ -12,8 +12,10 @@ class ArticuloController extends Controller
 {
     public function index()
     {
+        $marcas = Marca::all();
+        $categorias = Categoria::all();
         $articulos = Articulo::paginate(10);
-        return view('articulos.index', compact('articulos'));
+        return view('articulos.index', compact('articulos', 'marcas', 'categorias'));
     }
 
     public function create()
@@ -54,7 +56,7 @@ class ArticuloController extends Controller
         $categorias = Categoria::all();
         $marcas = Marca::all();
         $ambientes = Ambiente::all();
-        return view('articulos.edit', compact('articulo','categorias', 'marcas', 'ambientes'));
+        return view('articulos.edit', compact('articulo', 'categorias', 'marcas', 'ambientes'));
     }
 
     public function update(Request $request, Articulo $articulo)
@@ -79,5 +81,41 @@ class ArticuloController extends Controller
         $articulo->delete();
 
         return redirect()->route('articulos.index')->with('success', 'El artículo se ha eliminado correctamente.');
+    }
+
+    public function filtrar(Request $request)
+    {
+        $marcas = Marca::all();
+        $categorias = Categoria::all();
+
+        $marcaId = $request->input('marca');
+        $categoriaId = $request->input('categoria');
+
+        if ($marcaId && $categoriaId) {
+            // Filtrar por marca y categoría
+            $articulosFiltrados = Articulo::where('marcas_idmarca', $marcaId)
+                ->where('categorias_idcategoria', $categoriaId);
+        } elseif ($marcaId) {
+            // Filtrar solo por marca
+            $articulosFiltrados = Articulo::where('marcas_idmarca', $marcaId);
+        } elseif ($categoriaId) {
+            // Filtrar solo por categoría
+            $articulosFiltrados = Articulo::where('categorias_idcategoria', $categoriaId);
+        } else {
+            $articulosFiltrados = Articulo::query();
+        }
+        $articulos = $articulosFiltrados->paginate(10);
+        // Retornar los resultados filtrados o todos los artículos a la vista
+        return view('articulos.index', compact('articulos', 'marcas', 'categorias'));
+    }
+    public function buscar(Request $request)
+    {
+        $marcas = Marca::all();
+        $categorias = Categoria::all();
+        $search = $request->input('search');
+
+        $articulos = Articulo::where('articulo', 'like', "%$search%")->paginate(10);
+
+        return view('articulos.index', compact('articulos', 'marcas', 'categorias'));
     }
 }
