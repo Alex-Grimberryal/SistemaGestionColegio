@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-md-10 text-right">
                     <div class="d-flex justify-content-end">
-                        <a href="{{ route('ambientes.create') }}" class="btn btn-outline-primary">Añadir</a>
+                        <a href="{{ route('ambientes.create') }}" class="btn btn-primary">Añadir</a>
                     </div>
                 </div>
             </div>

@@ -11,22 +11,29 @@
             <div class="card text-bg-success mb-3" style="max-width: 18rem;">
                 <div class="card-header">Articulos en Uso</div>
                 <div class="card-body">
-                    <h5 class="card-title">Hay {{ $articulos->sumStockEnUso}} articulos actualmente en Uso</h5>
-                    <p class="card-text">Ver mas</p>
+                    <h6 class="card-title">Hay {{ $articulos->sumStockEnUso}} articulos actualmente en Uso</h6>
+
+                </div>
+                <div class="card-footer text-center">
+                    𒊹
                 </div>
             </div>
             <div class="card text-bg-warning mb-3" style="max-width: 18rem;">
                 <div class="card-header">Articulos en Almacen</div>
                 <div class="card-body">
-                    <h5 class="card-title">Hay {{ $articulos->sumStockAlmacenado }} articulos almacenados</h5>
-                    <p class="card-text">Ver mas</p>
+                    <h6 class="card-title">Hay {{ $articulos->sumStockAlmacenado }} articulos almacenados</h6>
+                </div>
+                <div class="card-footer text-center">
+                    𒊹
                 </div>
             </div>
             <div class="card text-bg-danger mb-3" style="max-width: 18rem;">
                 <div class="card-header">Articulos Dañados</div>
                 <div class="card-body">
-                    <h5 class="card-title">Hay {{ $articulos->sumStockDanado }} articulos dañados</h5>
-                    <p class="card-text">Ver mas</p>
+                    <h6 class="card-title">Hay {{ $articulos->sumStockDanado }} articulos dañados</h6>
+                </div>
+                <div class="card-footer text-center">
+                    𒊹
                 </div>
             </div>
         </div>

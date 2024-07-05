@@ -12,7 +12,7 @@
                 </div>
                 <div class="form-group">
                     <label for="contrasena">Contraseña:</label>
-                    <input type="text" name="contrasena" class="form-control" value="{{ $usuario->contrasena }}" required>
+                    <input type="text" name="contrasena" class="form-control" value="{{ Crypt::decryptString($usuario->recuperacion)  }}" required>
                 </div>
                 <div class="form-group">
                     <label for="rol">Rol:</label>

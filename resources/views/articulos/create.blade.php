@@ -78,7 +78,7 @@
                         <input type="number" name="stock_dañado" aria-label="Stock dañado" class="form-control">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-outline-primary mt-4">Guardar Articulo</button>
+                <button type="submit" class="btn btn-primary mt-4">Guardar Articulo</button>
             </form>
         </div>
     </main>

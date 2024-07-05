@@ -7,7 +7,7 @@
                 <div class="top-section text-center">
                     <div class="align-items-center col-12">
                         <h1>Bienvenido {{ session('nombre') }}</h1>
-                        <h5>Su usuario es {{ session('rol') }}</h5>
+
                     </div>
                 </div>
             </div>
@@ -20,22 +20,30 @@
                 <div class="card text-bg-success mb-3" style="max-width: 18rem;">
                     <div class="card-header">Articulos registrados</div>
                     <div class="card-body">
-                        <h5 class="card-title">Hay {{ $articulos->sumStockEnUso + $articulos->sumStockAlmacenado + $articulos->sumStockDanado }} articulos en inventario</h5>
-                        <p class="card-text">Ver mas</p>
+                        <h6 class="card-title">Hay {{ $articulos->sumStockEnUso + $articulos->sumStockAlmacenado + $articulos->sumStockDanado }} articulos en inventario</h6>
+                    </div>
+                    <div class="card-footer text-center">
+                        𒊹
                     </div>
                 </div>
                 <div class="card text-bg-warning mb-3" style="max-width: 18rem;">
                     <div class="card-header">Articulos sin usar</div>
                     <div class="card-body">
-                        <h5 class="card-title">Hay {{ $articulos->sumStockAlmacenado }} articulos almacenados</h5>
-                        <p class="card-text">Ver mas</p>
+                        <h6 class="card-title">Hay {{ $articulos->sumStockAlmacenado }} articulos almacenados</h6>
+
+                    </div>
+                    <div class="card-footer text-center">
+                        𒊹
                     </div>
                 </div>
                 <div class="card text-bg-secondary mb-3" style="max-width: 18rem;">
                     <div class="card-header">Usuarios</div>
                     <div class="card-body">
-                        <h5 class="card-title">Hay {{ $usuarios->admin + $usuarios->oper  }} usuarios activos</h5>
-                        <p class="card-text">Ver mas</p>
+                        <h6 class="card-title">Hay {{ $usuarios->admin + $usuarios->oper  }} usuarios activos</h6>
+
+                    </div>
+                    <div class="card-footer text-center">
+                        𒊹
                     </div>
                 </div>
             </div>

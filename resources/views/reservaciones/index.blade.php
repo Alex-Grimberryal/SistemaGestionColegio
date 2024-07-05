@@ -274,7 +274,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Modal grande de horario dinamico primaria -->
+                        <!-- Modal grande de horario dinamico secundaria -->
                         <div class="modal fade" id="verHorarioSecundaria" tabindex="-1" role="dialog"
                             aria-labelledby="modalSecundarioLabel" aria-hidden="true">
                             <div class="modal-dialog modal-xl">
@@ -471,7 +471,7 @@
                                             <td>{{ $cita->horarioF }}</td>
                                             <td>
                                                 <div class="col-4">
-                                                    <button type="button" class="btn btn-primary"
+                                                    <button type="button" class="btn btn-info"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#editarCitaModal{{ $cita->id }}">
                                                         Editar

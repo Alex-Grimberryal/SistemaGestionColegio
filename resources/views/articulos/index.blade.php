@@ -27,7 +27,7 @@
                             </select>
                         </div>
                         <div class="col-2">
-                            <button type="submit" class="btn btn-outline-primary">Filtrar</button>
+                            <button type="submit" class="btn btn-warning">Filtrar</button>
                         </div>
                     </div>
                 </form>
@@ -37,13 +37,13 @@
                     <div class="d-flex-justify-content-end">
                         <form class="d-flex" role="search" action="{{ route('articulo.buscar') }}" method="GET">
                             <input class="form-control me-2" type="search" placeholder="Buscar Articulo" aria-label="Search" name="search">
-                            <button class="btn btn-outline-success" type="submit">Buscar</button>
+                            <button class="btn btn-success" type="submit">Buscar</button>
                         </form>
                     </div>
                 </div>
                 <div class="col-md-1 text-right">
                     <div class="d-flex justify-content-end">
-                        <a href="{{ route('articulos.create') }}" class="btn btn-outline-primary">Añadir</a>
+                        <a href="{{ route('articulos.create') }}" class="btn btn-primary">Añadir</a>
                     </div>
                 </div>
             </div>
@@ -86,7 +86,7 @@
                                     <td>
                                         <div class="col-4">
                                             <a href="{{ route('articulos.edit', ['articulo' => $articulo->id]) }}"
-                                                class="btn btn-sm btn-outline-info">Editar</a>
+                                                class="btn btn-sm btn-info">Editar</a>
                                         </div>
                                     </td>
                                 </tr>

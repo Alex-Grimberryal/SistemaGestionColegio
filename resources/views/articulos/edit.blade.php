@@ -20,7 +20,7 @@
                     <select name="categorias_idcategoria" class="form-control" required>
                         <option value="">Seleccionar Categoria</option>
                         @foreach ($categorias as $categoria)
-                            <option value="{{ $categoria->idcategoria }}" {{ $categoria->idcategoria == $articulo->categoria_idcategoria ? 'selected' : '' }}>{{ $categoria->categoria }}</option>
+                            <option value="{{ $categoria->idcategoria }}" {{ $categoria->idcategoria == $articulo->categorias_idcategoria ? 'selected' : '' }}>{{ $categoria->categoria }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -29,7 +29,7 @@
                     <select name="marcas_idmarca" class="form-control" required>
                         <option value="">Seleccionar Marca</option>
                         @foreach ($marcas as $marca)
-                            <option value="{{ $marca->idmarca }}" {{ $marca->idmarca == $articulo->marca_idmarca ? 'selected' : '' }}>{{ $marca->marca }}</option>
+                            <option value="{{ $marca->idmarca }}" {{ $marca->idmarca == $articulo->marcas_idmarca ? 'selected' : '' }}>{{ $marca->marca }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -38,13 +38,13 @@
                     <select name="ambientes_idambiente" class="form-control" required>
                         <option value="">Seleccionar Ubicacion</option>
                         @foreach ($ambientes as $ambiente)
-                            <option value="{{ $ambiente->idambiente }}" {{ $ambiente->idambiente == $articulo->ambiente_idambiente ? 'selected' : '' }}>{{ $ambiente->ambiente }}</option>
+                        <option value="{{ $ambiente->idambiente }}" {{ $ambiente->idambiente == $articulo->ambientes_idambiente ? 'selected' : '' }}>{{ $ambiente->ambiente }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="fechaadq">Fecha de adquisición:</label>
-                    <input type="date" class="form-control" id="fechaadq" name="fechaadq" value="{{ $articulo->fechaadq instanceof \Carbon\Carbon ? $articulo->fechaadq->format('Y-m-d') : '' }}" required/>
+                    <input type="date" class="form-control" id="fechaadq" name="fechaadq"  value="{{ $articulo->fechaadq }}" required/>
                 </div>
 
                 <script>
@@ -77,7 +77,7 @@
                         <input type="number" name="stock_dañado" aria-label="Stock dañado" class="form-control" value="{{ $articulo->stock_dañado }}" required>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-outline-primary mt-4">Guardar Articulo</button>
+                <button type="submit" class="btn btn-primary mt-4">Guardar Articulo</button>
             </form>
         </div>
     </main>
